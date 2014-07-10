@@ -6,6 +6,8 @@ class RAMChip
   attr_accessor :index
   attr_reader :size, :mem
 
+  # constructor
+  # @param size size of memory in bytes
   def initialize(size)
     @mem = []
     @index = 0
@@ -13,14 +15,20 @@ class RAMChip
     @size = size
   end
 
+  # get current value of memory which is value at current index 
   def value
     @mem[@index]
   end
 
+  # set value at current index
+  # @param val new value
   def value=(val)
     @mem[@index] = val
   end
   
+  # index operator
+  # @param i index to set
+  # @return value at given index
   def [](i)
     @mem[i]
   end

@@ -1,12 +1,16 @@
 #!/usr/bin/env ruby
 
 # encoding: utf-8
+
 # brainfuck parser 
 # @author kubar3k
+# licence of this file and included ramchip and parser: CC
+
 
 require_relative 'ramchip'
 require_relative 'parser'
 
+# hmm... do I need to explain? 
 def usage()
   print "* * * Brainfuck Interpreter in Ruby * * *\n"
   print "Kuba 'kubar3k' Porębski proudly presents to you.\n"
@@ -21,7 +25,9 @@ def usage()
   print "\n"
 end
 
-def options()
+# simple command line options parser
+# @return hash of available options, default and changed by user
+def cl_options_read()
   opts = { :source_code => "", :mem_size => 32, :om => false, :oi => false }
   loop {
     case ARGV[0]
@@ -33,19 +39,21 @@ def options()
       else break
     end
   }
-  return opts
+  return opts # i'm using `return` keyword for sake of readability
 end
 
+# print out the results
 def results(parser, opts)
   print "[#{parser.ram.mem.join(' ') }]\n" if opts[:om]
   print "#{parser.ram.index}\n" if opts[:oi]
 end
 
 
+# main entry of application
 def main()
   if ARGV.length > 0
 
-    opts = options
+    opts = cl_options_read
 
     m = RAMChip.new(opts[:mem_size])
     p = Parser.new(opts[:source_code], m)
