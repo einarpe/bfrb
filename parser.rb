@@ -90,7 +90,13 @@ class Parser
     elsif token == "]"
       return _go_back(current_positon)
     else
-      case token
+      return _parse_simple_token(token, current_positon)
+    end
+  end
+
+  # parsing one of these tokens: +-<>,.
+  def _parse_simple_token(token, current_positon)
+    case token
         when "+" then @ram.value += 1
         when "-" then @ram.value -= 1
         when "<" then @ram.index -= 1 if @ram.index > 0
@@ -98,9 +104,7 @@ class Parser
         when "," then @ram.value = stdin
         when "." then stdout(@ram.value)
       end
-      
       return current_positon + 1
-    end
   end
   
   # performing `while` operation when opening bracket is found in script
@@ -120,5 +124,5 @@ class Parser
     return @ram.value != 0 ? bracket + 1 : current_positon + 1
   end
   
-  private :_internal_parse, :_perform_while, :_go_back
+  private :_internal_parse, :_perform_while, :_go_back, :_parse_simple_token
 end
