@@ -1,6 +1,7 @@
 # Parser class
-# part of ruby brainfuck
-# @author kubar3k
+# part of Ruby Brainfuck
+# @author Jakub Porębski "kubar3k"
+#
 
 class Parser
 
